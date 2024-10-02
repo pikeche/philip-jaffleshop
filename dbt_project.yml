@@ -38,5 +38,7 @@ models:
     staging:
       +materialized: view
     marts:
+      # marts should have relationship test
+      +required_tests: {"relationship.*": 1}      
       core:
         +materialized: table
