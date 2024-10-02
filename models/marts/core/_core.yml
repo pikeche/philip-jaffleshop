@@ -1,0 +1,29 @@
+version: 2
+
+models:
+    - name: dim_customers
+      description: dim_customers
+      columns: 
+        - name: customer_id
+          description: The primary key for dim_customers.
+          tests:
+            - unique
+            - not_null
+
+    - name: fct_orders
+      description: fact measures 
+      columns: 
+        - name: order_id
+          description: Primary key for fct_orders.
+          tests:
+            - unique
+            - not_null
+
+    - name: int_orders__pivoted
+      description: int_orders__pivoted
+      columns: 
+        - name: order_id
+          description: Primary key for nt_orders__pivoted.
+          tests:
+            - unique
+            - not_null
