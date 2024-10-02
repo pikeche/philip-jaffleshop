@@ -1,0 +1,10 @@
+version: 2
+models:
+  - name: all_dates
+    description: start to end dates in days
+    columns:
+      - name: date_day
+        description: Primary key for the listing
+        tests:
+          - unique
+          - not_null
