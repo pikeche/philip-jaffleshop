@@ -9,6 +9,9 @@ models:
           tests:
             - unique
             - not_null
+            - relationships:
+                to: ref('stg_customers')
+                field: customer_id
 
     - name: fct_orders
       description: fact measures 
@@ -18,6 +21,9 @@ models:
           tests:
             - unique
             - not_null
+            - relationships:
+                to: ref('stg_orders')
+                field: order_id
 
     - name: int_orders__pivoted
       description: int_orders__pivoted
@@ -27,3 +33,6 @@ models:
           tests:
             - unique
             - not_null
+            - relationships:
+                to: ref('stg_payments')
+                field: order_id
