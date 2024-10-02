@@ -26,5 +26,5 @@ final as (
     from orders
     left join order_payments using (order_id)
 )
-
+-- final
 select * from final
