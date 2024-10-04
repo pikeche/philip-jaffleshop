@@ -26,9 +26,24 @@ models:
                 field: order_id
         - name: amount
           description: dollars spent per order
-          tests:      
-            -  assert_column_greater_than_three 
-            -  average_dollars_spent_greater_than_one
+          tests:    
+            -  assert_column_greater_than_three: 
+                config:
+                  severity: warn  
+                  warn_if:  ">15"
+                  error_if: ">30"                                
+        - name: customer_id
+          description: The foreign key.
+          tests:
+            - unique:
+                config:
+                  limit: 10
+                  severity: warn
+                  where: "order_date > '2018-3-01'"
+                  store_failures: true
+                  # to write failures to a different schema name
+                  schema: jaffleshop_philip
+
 
     - name: int_orders__pivoted
       description: int_orders__pivoted
