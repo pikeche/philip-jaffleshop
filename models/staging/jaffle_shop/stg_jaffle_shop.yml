@@ -7,7 +7,9 @@ models:
         - name: customer_id
           description: The primary key for customers.
           tests:
-            - unique
+            - unique:
+                config:
+                  severity: warn
             - not_null
 
     - name: stg_orders
@@ -16,6 +18,8 @@ models:
         - name: order_id
           description: Primary key for orders.
           tests:
+            - unique
+            - not_null
             - relationships:
                 to: ref('stg_customers')
                 field: customer_id
@@ -29,3 +33,12 @@ models:
                   - returned
                   - placed
                   - return_pending
+
+    - name: stg_products
+      description: Product (food and drink items that can be ordered) data with basic cleaning and transformation applied, one row per product.
+      columns:
+        - name: product_id
+          description: The unique key for each product.
+          data_tests:
+            - not_null
+            - unique                  

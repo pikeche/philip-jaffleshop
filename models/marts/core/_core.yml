@@ -1,0 +1,58 @@
+version: 2
+
+models:
+    - name: dim_customers
+      description: dim_customers
+      columns: 
+        - name: customer_id
+          description: The primary key for dim_customers.
+          tests:
+            - unique
+            - not_null
+            - relationships:
+                to: ref('stg_customers')
+                field: customer_id
+
+    - name: fct_orders
+      description: fact measures 
+      columns: 
+        - name: order_id
+          description: Primary key for fct_orders.
+          tests:
+            - unique
+            - not_null
+            - relationships:
+                to: ref('stg_orders')
+                field: order_id
+        - name: amount
+          description: dollars spent per order
+          tests:    
+            -  assert_column_greater_than_three: 
+                config:
+                  severity: warn  
+                  warn_if:  ">15"
+                  error_if: ">30"                                
+        - name: customer_id
+          description: The foreign key.
+          tests:
+            - unique:
+                config:
+                  limit: 10
+                  severity: warn
+                  where: "order_date > '2018-3-01'"
+                  store_failures: true
+                  # to write failures to a different schema name
+                  schema: jaffleshop_philip
+
+
+    - name: int_orders__pivoted
+      description: int_orders__pivoted
+      columns: 
+        - name: order_id
+          description: Primary key for nt_orders__pivoted.
+          tests:
+            - unique
+            - not_null
+            - relationships:
+                to: ref('stg_payments')
+                field: order_id

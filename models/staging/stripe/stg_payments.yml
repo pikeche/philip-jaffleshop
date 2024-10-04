@@ -1,0 +1,10 @@
+version: 2
+
+models:
+    - name: stg_payments
+      columns:
+        - name: payment_id
+          description: Primary key for stg_customers        
+          tests:
+            - unique
+            - not_null  
