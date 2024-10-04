@@ -35,7 +35,7 @@ sources:
         - name: mock_orders
           description: Raw orders data.
           columns:
-            - name: id
+            - name: order_id
               description: Primary key for orders.
               tests:
                 - unique
