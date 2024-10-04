@@ -24,6 +24,23 @@ sources:
                 - unique
                 - not_null
 
+        - name: products
+          description: One record per SKU for items sold in stores
+          columns:
+            - name: sku
+              description: Primary key for orders.
+              tests:
+                - unique
+                - not_null
+        - name: mock_orders
+          description: Raw orders data.
+          columns:
+            - name: id
+              description: Primary key for orders.
+              tests:
+                - unique
+                - not_null
+
         # - name: orders
         #   description: Complete orders model including the amount associated with each order.
         #   tests:

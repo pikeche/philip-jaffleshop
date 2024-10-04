@@ -1,4 +1,4 @@
-{{ config(enabled = false) }}
+-- {{ config(enabled = false) }}
 
 {% test assert_column_greater_than_three( model, column_name) %}
 
