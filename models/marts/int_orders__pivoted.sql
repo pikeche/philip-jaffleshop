@@ -1,6 +1,5 @@
 -- to override required tests in dbt_project.yml
 {{ config(required_tests=None) }}
-
 {%- set payment_methods = ['bank_transfer','credit_card','coupon','gift_card'] -%}
  
 with payments as (
@@ -20,8 +19,10 @@ final as (
        {% endif -%}
  
        {%- endfor %}
-   from {{ ref('stg_payments') }}
+   from payments
+   where status = 'success'
    group by 1
 )
  
 select * from final
+limit 100
