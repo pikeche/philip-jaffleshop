@@ -3,7 +3,8 @@ version: 2
 sources:
     - name: stripe
       database: sandbox
-      schema: stripe
+      # schema: stripe    
+      schema: PIKECHE      
       tables:
         - name: payment
           columns:

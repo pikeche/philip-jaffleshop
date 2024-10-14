@@ -1,14 +1,14 @@
 -- dbt 
 {% snapshot mock_orders %}
 
-{% set new_schema = target.schema + '_snapshot' %}
+-- {% set new_schema = target.schema + '_snapshot' %}
+{% set schema = target.schema %}
 
 {{
     config(
       target_database='sandbox',
-      target_schema=new_schema,
+      target_schema=schema,
       unique_key='order_id',
-
       strategy='timestamp',
       updated_at='updated_at'
     )

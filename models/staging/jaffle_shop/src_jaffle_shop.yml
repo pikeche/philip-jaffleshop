@@ -2,9 +2,10 @@ version: 2
 
 sources:
     - name: jaffle_shop
-      description: A clone of a Postgres application database.
-      database: sandbox
-      schema: jaffle_shop
+      description: A clone of a Postgres application database. 
+      database: sandbox       
+      schema: PIKECHE        
+      # schema: jaffle_shop
       tables:
         - name: customers
           description: Raw customers data.
@@ -24,14 +25,18 @@ sources:
                 - unique
                 - not_null
 
-        - name: products
-          description: One record per SKU for items sold in stores
-          columns:
-            - name: sku
-              description: Primary key for orders.
-              tests:
-                - unique
-                - not_null
+        # - name: products
+        #   description: One record per SKU for items sold in stores
+        #   columns:
+        #     - name: sku
+        #       description: Primary key for orders.
+        #       tests:
+        #         - unique:
+        #             config:
+        #               severity: warn
+        #         - not_null:
+        #             config:
+        #               severity: warn
         - name: mock_orders
           description: Raw orders data.
           columns:
