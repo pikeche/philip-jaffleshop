@@ -46,4 +46,4 @@ models:
 tests:
   jaffle_shop:
     severity: warn
-    +store_failures: true
+    +store_failures: false

@@ -4,12 +4,12 @@
 
     {%- set old_etl_relation = adapter.get_relation(
         database=target.database,
-        schema="jaffleshop_analytics",
+        schema="pikeche",
         identifier="fct_orders"
     ) -%}
     {%- set new_etl_relation = adapter.get_relation(
         database=target.database,
-        schema="jaffleshop_philip",
+        schema="pikeche",
         identifier="fct_orders"
     ) -%}
 

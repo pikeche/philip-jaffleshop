@@ -2,8 +2,9 @@ with
 
 source as (
 
-    select * from {{ source('jaffle_shop',  'orders') }}
-
+    select * 
+    from {{ source('jaffle_shop',  'orders') }}
+    {{ dev_data_limit( 'order_date', 100 ) }}
 ),
 
 staged as (
@@ -12,7 +13,8 @@ staged as (
         id as order_id,
         user_id as customer_id,
         order_date,
-        datediff('day', order_date, {{ dbt.current_timestamp() }} ) as days_since_ordered,
+        datediff('day', order_date, current_timestamp() ) as days_since_ordered,
+        -- datediff('day', order_date, {{ dbt.current_timestamp() }} ) as days_since_ordered,        
         status like '%pending%' as is_status_pending,
         case 
             when status like '%shipped%' then 'shipped'

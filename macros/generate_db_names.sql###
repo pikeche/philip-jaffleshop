@@ -1,0 +1,32 @@
+{% macro generate_database_name(custom_database_name=none, node=none) -%}
+
+    {%- set default_database = target.database -%}
+    {%- set target_env = target.name -%}
+    {%- set production_and_manufacturing = ['production_data','quality_control','manufacturing_logs','vehicle_specs','vehicle_testing','production_planning'] -%}
+    {%- set supply_chain_and_inventory = ['supply_chain_management','sales_and_inventory','parts_inventory','vendor_management'] -%}
+    {%- set business_operations = ['employee_records','finance_and_accounting','customer_relationships','fleet_management','regulatory_compliance','environmental_compliance'] -%}
+    {%- set research_and_development = 'research_and_development' -%}
+    {%- set sales_and_marketing = 'marketing_campaigns' -%}
+
+    {%- if custom_database_name is none -%}
+        {{ default_database }}
+    {% else %}
+        {% set value_1 = custom_database_name.split('_')[0] %}
+            {%- if value_1|lower == 'external' -%}
+                {{ target_env }}_{{ custom_database_name|replace('external_','') }}_SCI
+            {% else %}
+                {%- if custom_database_name in production_and_manufacturing -%}
+                    {{ target_env }}_{{ custom_database_name}}_PM
+                {% elif custom_database_name in business_operations %}
+                    {{ target_env }}_{{ custom_database_name}}_BO
+                {% elif custom_database_name == research_and_development %}
+                    {{ target_env }}_{{ custom_database_name}}_RAD
+                {% elif custom_database_name == sales_and_marketing %}
+                    {{ target_env }}_{{ custom_database_name}}_SAM
+                {% else %}
+                    {{ target_env }}_{{ custom_database_name}}_SCI
+                {%- endif -%}
+            {%- endif -%}
+    {%- endif -%}
+
+{%- endmacro %}

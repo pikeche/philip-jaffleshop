@@ -42,7 +42,7 @@ models:
                   where: "order_date > '2018-3-01'"
                   store_failures: true
                   # to write failures to a different schema name
-                  schema: jaffleshop_philip
+                  # schema: jaffleshop_philip
 
 
     - name: int_orders__pivoted
