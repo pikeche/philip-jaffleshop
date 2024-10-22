@@ -5,7 +5,7 @@
 
 {{
     config(
-      target_database='sandbox',
+      target_database=target.database,
       target_schema=schema,
       unique_key='id',
       strategy='timestamp',
